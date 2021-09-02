@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Benutzerverwaltung</title>
+    </h:head>
+    <h:body>
+        <h:dataTable value = "#{benutzer.userList}" var = "user"
+            styleClass = "userTable"
+            headerClass = "userTableHeader"
+            rowClasses = "userTableOddRow,userTableEvenRow">
+        
+        <h:column>    				
+            <f:facet name = "header">Nummer</f:facet>		
+            <h:outputText value="#{benutzer.userList.indexOf(user)+1}"/>            
+        </h:column>
+   
+        <h:column>
+            <f:facet name = "header">Name</f:facet>
+            #{user.userName}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">Emailadresse</f:facet>
+            #{user.emailAddress}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">Rolle</f:facet>
+            #{user.role}
+        </h:column>        
+
+        <h:column>
+            <h:form id="userChangeForm">
+            <f:facet name = "header"></f:facet>
+            <p:commandButton action="#{benutzer.changeUser(user)}" value="Ändern"/>
+            </h:form>
+        </h:column>
+
+        <h:column>
+            <h:form id="dishDeleteForm">
+            <f:facet name = "header"></f:facet>
+            <p:commandButton action="#{benutzer.deleteUser(user)}" value="Löschen"/>
+            </h:form>
+        </h:column>
+        </h:dataTable> 
+        <h:form id="navigation">
+        <p:commandButton action="createUser" value="Neu"/>
+        <p:commandButton action="loginSuccessfulAdmin" value="Zurück"/>
+        </h:form>
+    </h:body>  
+</html>

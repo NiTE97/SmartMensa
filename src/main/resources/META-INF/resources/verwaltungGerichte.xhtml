@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>login</title>
+    </h:head>
+    <h:body>
+        <h:dataTable value = "#{gerichte.dishList}" var = "gericht"
+            styleClass = "gerichtTable"
+            headerClass = "gerichtTableHeader"
+            rowClasses = "gerichtTableOddRow,gerichtTableEvenRow">
+        
+        <h:column>    				
+            <f:facet name = "header">Nummer</f:facet>		
+            <h:outputText value="#{gerichte.dishList.indexOf(gericht)+1}"/>            
+        </h:column>
+   
+        <h:column>
+            <f:facet name = "header">Name</f:facet>
+            #{gericht.dishName}
+        </h:column>
+        
+        <h:column>
+            <f:facet name = "header">Preis</f:facet>
+            #{gericht.price}
+        </h:column>
+        
+        <h:column>
+            <f:facet name = "header">Kategorie</f:facet>
+            #{gericht.category.categoryName}
+        </h:column>
+
+        <h:column>
+            <h:form id="dishChangeForm">
+            <f:facet name = "header"></f:facet>
+            <p:commandButton action="#{gerichte.changeDish(gericht)}" value="Ändern"/>
+            </h:form>
+        </h:column>
+
+        <h:column>
+            <h:form id="dishDeleteForm">
+            <f:facet name = "header"></f:facet>
+            <p:commandButton action="#{gerichte.deleteDish(gericht)}" value="Löschen"/>
+            </h:form>
+        </h:column>
+        </h:dataTable> 
+        <h:form id="navigation">
+        <p:commandButton action="createDish" value="Neu"/>
+        <p:commandButton action="loginSuccessfulAdmin" value="Zurück"/>
+        </h:form>
+    </h:body>  
+</html>
